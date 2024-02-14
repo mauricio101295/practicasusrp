@@ -69,18 +69,15 @@ class default(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.h = h = np.array([1,1,1,1])
-        self.sps = sps = len(h)
         self.rb = rb = 32000
-        self.samp_rate = samp_rate = rb*sps
-        self.fsk_deviation = fsk_deviation = 100
-        self.delay = delay = 145
+        self.fsk_deviation = fsk_deviation = 500
+        self.delay = delay = 96
 
         ##################################################
         # Blocks
         ##################################################
 
-        self._delay_range = Range(0, 250, 1, 145, 200)
+        self._delay_range = Range(0, 250, 1, 96, 200)
         self._delay_win = RangeWidget(self._delay_range, self.set_delay, "Retardo", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._delay_win)
         self.segunda_portadora = analog.sig_source_f(rb, analog.GR_COS_WAVE, int(1e3), 1, 0, 0)
@@ -135,7 +132,7 @@ class default(gr.top_block, Qt.QWidget):
         self.primera_portadora = analog.sig_source_f(rb, analog.GR_COS_WAVE, int(2e3), 1, 0, 0)
         self.multiply2 = blocks.multiply_vff(1)
         self.multiply1 = blocks.multiply_vff(1)
-        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1,  firdes.low_pass(1,rb,1500, 400), int(1.5e3), rb)
+        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcf(1,  firdes.low_pass(1,rb,1000, 400), int(1.5e3), rb)
         self.digital_binary_slicer_fb_0 = digital.binary_slicer_fb()
         self.blocks_sub_xx_0 = blocks.sub_ff(1)
         self.blocks_repeat_0 = blocks.repeat(gr.sizeof_char*1, 100)
@@ -179,37 +176,16 @@ class default(gr.top_block, Qt.QWidget):
 
         event.accept()
 
-    def get_h(self):
-        return self.h
-
-    def set_h(self, h):
-        self.h = h
-        self.set_sps(len(self.h))
-
-    def get_sps(self):
-        return self.sps
-
-    def set_sps(self, sps):
-        self.sps = sps
-        self.set_samp_rate(self.rb*self.sps)
-
     def get_rb(self):
         return self.rb
 
     def set_rb(self, rb):
         self.rb = rb
-        self.set_samp_rate(self.rb*self.sps)
         self.analog_quadrature_demod_cf_1.set_gain((self.rb/(2*math.pi*self.fsk_deviation)))
-        self.freq_xlating_fir_filter_xxx_0.set_taps( firdes.low_pass(1,self.rb,1500, 400))
+        self.freq_xlating_fir_filter_xxx_0.set_taps( firdes.low_pass(1,self.rb,1000, 400))
         self.primera_portadora.set_sampling_freq(self.rb)
         self.qtgui_time_sink_x_0.set_samp_rate(self.rb)
         self.segunda_portadora.set_sampling_freq(self.rb)
-
-    def get_samp_rate(self):
-        return self.samp_rate
-
-    def set_samp_rate(self, samp_rate):
-        self.samp_rate = samp_rate
 
     def get_fsk_deviation(self):
         return self.fsk_deviation

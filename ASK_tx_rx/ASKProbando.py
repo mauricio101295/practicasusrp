@@ -76,7 +76,7 @@ class ASKProbando(gr.top_block, Qt.QWidget):
             1024, #size
             samp_rate, #samp_rate
             "DEMODULACION ASK", #name
-            2, #number of inputs
+            3, #number of inputs
             None # parent
         )
         self.qtgui_time_sink_x_0.set_update_time(0.5)
@@ -107,7 +107,7 @@ class ASKProbando(gr.top_block, Qt.QWidget):
             -1, -1, -1, -1, -1]
 
 
-        for i in range(2):
+        for i in range(3):
             if len(labels[i]) == 0:
                 self.qtgui_time_sink_x_0.set_line_label(i, "Data {0}".format(i))
             else:
@@ -201,6 +201,7 @@ class ASKProbando(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_throttle2_1_0, 0), (self.blocks_delay_0, 0))
         self.connect((self.interp_fir_filter_xxx_0, 0), (self.multiply, 0))
         self.connect((self.interp_fir_filter_xxx_0, 0), (self.plot_rectangular, 0))
+        self.connect((self.interp_fir_filter_xxx_0, 0), (self.qtgui_time_sink_x_0, 2))
         self.connect((self.multiply, 0), (self.blocks_float_to_complex_0, 0))
         self.connect((self.multiply, 0), (self.plot_rectangular, 1))
 

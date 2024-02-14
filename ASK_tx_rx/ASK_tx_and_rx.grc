@@ -491,7 +491,7 @@ blocks:
     marker8: '-1'
     marker9: '-1'
     name: '"DEMODULACION ASK"'
-    nconnections: '2'
+    nconnections: '3'
     size: '1024'
     srate: samp_rate
     stemplot: 'False'
@@ -575,6 +575,7 @@ connections:
 - [blocks_throttle2_1_0, '0', virtual_sink_0, '0']
 - [interp_fir_filter_xxx_0, '0', multiply, '0']
 - [interp_fir_filter_xxx_0, '0', plot_rectangular, '0']
+- [interp_fir_filter_xxx_0, '0', qtgui_time_sink_x_0, '2']
 - [multiply, '0', blocks_float_to_complex_0, '0']
 - [multiply, '0', plot_rectangular, '1']
 - [virtual_source_0, '0', blocks_complex_to_mag_0, '0']

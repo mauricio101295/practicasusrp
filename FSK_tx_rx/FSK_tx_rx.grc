@@ -45,39 +45,27 @@ blocks:
     start: '0'
     step: '1'
     stop: '250'
-    value: '145'
+    value: '96'
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 12.0]
+    coordinate: [560, 12.0]
     rotation: 0
     state: enabled
 - name: fsk_deviation
   id: variable
   parameters:
     comment: ''
-    value: '100'
+    value: '500'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 76.0]
+    coordinate: [360, 12.0]
     rotation: 0
     state: enabled
-- name: h
-  id: variable
-  parameters:
-    comment: ''
-    value: np.array([1,1,1,1])
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [264, 12.0]
-    rotation: 0
-    state: true
 - name: rb
   id: variable
   parameters:
@@ -90,30 +78,6 @@ blocks:
     coordinate: [184, 12.0]
     rotation: 0
     state: enabled
-- name: samp_rate
-  id: variable
-  parameters:
-    comment: ''
-    value: rb*sps
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [528, 12.0]
-    rotation: 0
-    state: enabled
-- name: sps
-  id: variable
-  parameters:
-    comment: ''
-    value: len(h)
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [456, 12.0]
-    rotation: 0
-    state: true
 - name: analog_const_source_x_0
   id: analog_const_source_x
   parameters:
@@ -144,7 +108,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [552, 716.0]
+    coordinate: [504, 860.0]
     rotation: 180
     state: enabled
 - name: analog_random_source_x_0
@@ -172,7 +136,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: "FIN MODULACI\xD3N"
     maxoutbuf: '0'
     minoutbuf: '0'
     num_inputs: '2'
@@ -182,7 +146,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [592, 464.0]
+    coordinate: [592, 520.0]
     rotation: 180
     state: true
 - name: blocks_char_to_float_0
@@ -216,8 +180,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 348.0]
-    rotation: 0
+    coordinate: [88, 860.0]
+    rotation: 180
     state: enabled
 - name: blocks_delay_0
   id: blocks_delay
@@ -236,7 +200,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [552, 396.0]
+    coordinate: [592, 428.0]
     rotation: 180
     state: enabled
 - name: blocks_repeat_0
@@ -287,7 +251,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 724.0]
+    coordinate: [296, 868.0]
     rotation: 180
     state: enabled
 - name: freq_xlating_fir_filter_xxx_0
@@ -301,14 +265,14 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: rb
-    taps: ' firdes.low_pass(1,rb,1500, 400)'
+    taps: ' firdes.low_pass(1,rb,1000, 400)'
     type: fcf
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [552, 588.0]
-    rotation: 0
+    coordinate: [744, 836.0]
+    rotation: 180
     state: enabled
 - name: import_0
   id: import
@@ -320,7 +284,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 12.0]
+    coordinate: [264, 12.0]
     rotation: 0
     state: true
 - name: import_0_0
@@ -333,7 +297,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [632, 12.0]
+    coordinate: [464, 12.0]
     rotation: 0
     state: true
 - name: multiply1
@@ -351,7 +315,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [800, 424.0]
+    coordinate: [816, 448.0]
     rotation: 180
     state: true
 - name: multiply2
@@ -369,7 +333,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [800, 504.0]
+    coordinate: [816, 600.0]
     rotation: 180
     state: true
 - name: primera_portadora
@@ -392,7 +356,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1016, 388.0]
+    coordinate: [1008, 428.0]
     rotation: 180
     state: true
 - name: qtgui_time_sink_x_0
@@ -489,7 +453,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [264, 424.0]
+    coordinate: [224, 456.0]
     rotation: 180
     state: true
 - name: segunda_portadora
@@ -512,7 +476,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1016, 612.0]
+    coordinate: [1008, 652.0]
     rotation: 180
     state: true
 - name: virtual_sink_0
@@ -525,7 +489,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 180.0]
+    coordinate: [728, 172.0]
     rotation: 0
     state: true
 - name: virtual_sink_0_0
@@ -538,7 +502,33 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [896, 164.0]
+    coordinate: [928, 252.0]
+    rotation: 0
+    state: true
+- name: virtual_sink_1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: fsk_demodulada
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [28.0, 680]
+    rotation: 90
+    state: true
+- name: virtual_sink_2
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: fsk_modulada
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 612.0]
     rotation: 0
     state: true
 - name: virtual_source_0
@@ -551,7 +541,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1016, 316.0]
+    coordinate: [1008, 356.0]
     rotation: 180
     state: true
 - name: virtual_source_0_0
@@ -564,32 +554,45 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1016, 548.0]
+    coordinate: [1008, 588.0]
     rotation: 180
     state: true
-- name: virtual_source_0_1
+- name: virtual_source_1
   id: virtual_source
   parameters:
     alias: ''
-    comment: ''
-    stream_id: tag1
+    comment: "INICIO DEMODULACI\xD3N"
+    stream_id: fsk_modulada
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 356.0]
+    coordinate: [1000, 844.0]
     rotation: 180
+    state: true
+- name: virtual_source_2
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: fsk_demodulada
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 572.0]
+    rotation: 0
     state: true
 
 connections:
 - [analog_const_source_x_0, '0', blocks_sub_xx_0, '1']
 - [analog_quadrature_demod_cf_1, '0', digital_binary_slicer_fb_0, '0']
 - [analog_random_source_x_0, '0', blocks_repeat_0, '0']
-- [blocks_add_xx_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [blocks_add_xx_0, '0', qtgui_time_sink_x_0, '1']
+- [blocks_add_xx_0, '0', virtual_sink_2, '0']
 - [blocks_char_to_float_0, '0', blocks_sub_xx_0, '0']
 - [blocks_char_to_float_0, '0', virtual_sink_0, '0']
-- [blocks_char_to_float_1, '0', qtgui_time_sink_x_0, '2']
+- [blocks_char_to_float_1, '0', virtual_sink_1, '0']
 - [blocks_delay_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_repeat_0, '0', blocks_char_to_float_0, '0']
 - [blocks_sub_xx_0, '0', virtual_sink_0_0, '0']
@@ -599,9 +602,11 @@ connections:
 - [multiply2, '0', blocks_add_xx_0, '1']
 - [primera_portadora, '0', multiply1, '1']
 - [segunda_portadora, '0', multiply2, '1']
+- [virtual_source_0, '0', blocks_delay_0, '0']
 - [virtual_source_0, '0', multiply1, '0']
 - [virtual_source_0_0, '0', multiply2, '0']
-- [virtual_source_0_1, '0', blocks_delay_0, '0']
+- [virtual_source_1, '0', freq_xlating_fir_filter_xxx_0, '0']
+- [virtual_source_2, '0', qtgui_time_sink_x_0, '2']
 
 metadata:
   file_format: 1
