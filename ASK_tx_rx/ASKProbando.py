@@ -13,6 +13,7 @@ from gnuradio import qtgui
 from gnuradio import analog
 from gnuradio import blocks
 import numpy
+from gnuradio import digital
 from gnuradio import filter
 from gnuradio.filter import firdes
 from gnuradio import gr
@@ -67,6 +68,7 @@ class ASKProbando(gr.top_block, Qt.QWidget):
         self.sps = sps = len(h)
         self.rb = rb = 32000
         self.samp_rate = samp_rate = rb*sps
+        self.len_key = len_key = "packet_len"
 
         ##################################################
         # Blocks
@@ -171,10 +173,12 @@ class ASKProbando(gr.top_block, Qt.QWidget):
         self.multiply = blocks.multiply_vff(1)
         self.interp_fir_filter_xxx_0 = filter.interp_fir_filter_fff(sps, h)
         self.interp_fir_filter_xxx_0.declare_sample_delay(0)
+        self.digital_crc32_bb_0 = digital.crc32_bb(False, "packet_len", True)
         self.blocks_throttle2_1_0 = blocks.throttle( gr.sizeof_gr_complex*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
         self.blocks_throttle2_1 = blocks.throttle( gr.sizeof_float*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
         self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_float*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
         self.blocks_threshold_ff_0 = blocks.threshold_ff((500e-6), (500e-6), 0)
+        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 10, "packet_len")
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
         self.blocks_delay_0 = blocks.delay(gr.sizeof_gr_complex*1, 0)
         self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
@@ -187,18 +191,20 @@ class ASKProbando(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_random_source_x_0, 0), (self.blocks_char_to_float_0, 0))
+        self.connect((self.analog_random_source_x_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
         self.connect((self.analog_sig_source_x_0, 0), (self.multiply, 1))
         self.connect((self.blocks_char_to_float_0, 0), (self.interp_fir_filter_xxx_0, 0))
         self.connect((self.blocks_complex_to_float_0, 0), (self.blocks_throttle2_1, 0))
         self.connect((self.blocks_complex_to_mag_0, 0), (self.blocks_threshold_ff_0, 0))
         self.connect((self.blocks_delay_0, 0), (self.blocks_complex_to_float_0, 0))
         self.connect((self.blocks_float_to_complex_0, 0), (self.blocks_throttle2_1_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.digital_crc32_bb_0, 0))
         self.connect((self.blocks_threshold_ff_0, 0), (self.blocks_throttle2_0, 0))
         self.connect((self.blocks_throttle2_0, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.blocks_throttle2_1, 0), (self.qtgui_time_sink_x_0, 1))
         self.connect((self.blocks_throttle2_1_0, 0), (self.blocks_complex_to_mag_0, 0))
         self.connect((self.blocks_throttle2_1_0, 0), (self.blocks_delay_0, 0))
+        self.connect((self.digital_crc32_bb_0, 0), (self.blocks_char_to_float_0, 0))
         self.connect((self.interp_fir_filter_xxx_0, 0), (self.multiply, 0))
         self.connect((self.interp_fir_filter_xxx_0, 0), (self.plot_rectangular, 0))
         self.connect((self.interp_fir_filter_xxx_0, 0), (self.qtgui_time_sink_x_0, 2))
@@ -247,6 +253,12 @@ class ASKProbando(gr.top_block, Qt.QWidget):
         self.blocks_throttle2_1_0.set_sample_rate(self.samp_rate)
         self.plot_rectangular.set_samp_rate(self.samp_rate)
         self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
+
+    def get_len_key(self):
+        return self.len_key
+
+    def set_len_key(self, len_key):
+        self.len_key = len_key
 
 
 

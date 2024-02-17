@@ -245,7 +245,7 @@ blocks:
     len_tag_key: len_tag_key
     maxoutbuf: '0'
     minoutbuf: '0'
-    packet_len: packet_len
+    packet_len: '51'
     type: byte
     vlen: '1'
   states:
